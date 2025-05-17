@@ -323,6 +323,12 @@ get_scRNA_info <- function(scRNA_count, sc_cell_type_labels, cell_type_names = N
     }
   }
   
+  filter_z <- which(colSums(scRNA_count)==0)
+  if(length(filter_z)>0){
+  sc_cell_type_labels <- sc_cell_type_labels[-filter_z]
+  scRNA_count <- scRNA_count[,-filter_z]
+    }
+  
   nUMI <- colSums(scRNA_count)
   n_cell_types <- length(cell_type_names)
   
