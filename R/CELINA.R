@@ -613,6 +613,7 @@ Testing_interaction_all <- function(object, kernel_mat = NULL,
   ## Subset the cell type proportion matrix for remaining cell types
   celltype_mat <- t(object@celltype_mat[names(object@genes_list), ])
   celltype_mat <- sweep(celltype_mat, 1, rowSums(celltype_mat), "/")
+  celltype_mat[is.nan(celltype_mat)] <- 0 
   object@celltype_mat <- t(celltype_mat)
 
   ## Remove the cells from the cell types that have been filtered out for single cell resolution
